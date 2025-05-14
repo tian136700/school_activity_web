@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>校园活动管理平台</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #4f46e5;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* 头部样式 */
+        .hero-section {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: var(--light);
+            padding: 2rem;
+            max-width: 1200px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.05em;
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        /* 按钮样式 */
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--light);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-ghost {
+            border: 2px solid var(--light);
+            color: var(--light);
+            background: transparent;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* 活动列表 */
+        .activity-section {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+        }
+
+        .see-more {
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .see-more:hover {
+            color: var(--secondary);
+        }
+
+        /* 卡片布局 */
+        .activity-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            z-index: 1;
+        }
+
+        .card-media {
+            position: relative;
+            height: 200px;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .card-desc {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-card {
+            padding: 0.5rem 1.2rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .btn-card:hover {
+            background: var(--secondary);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 60vh;
+                min-height: 400px;
+            }
+
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .activity-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>
+            <span style="font-size: 1.2em">🎉</span>
+            校园活动管理平台
+            <span style="font-size: 1.2em">✨</span>
+        </h1>
+        <p class="subtitle">发现精彩活动，开启校园新体验</p>
+        <div class="cta-group">
+            <a href="/activities" class="btn btn-primary">
+                立即探索
+                <span style="margin-left: 0.5em">→</span>
+            </a>
+            <a href="/create" class="btn btn-ghost">
+                发起活动
+            </a>
+        </div>
+    </div>
+</header>
+
+<section class="activity-section">
+    <div class="section-header">
+        <h2>热门活动推荐</h2>
+        <a href="/activities" class="see-more">
+            查看全部 <span style="margin-left: 0.3em">→</span>
+        </a>
+    </div>
+
+    <div class="activity-grid">
+        <!-- 活动卡片1 -->
+        <div class="activity-card">
+            <div class="card-badge">热门</div>
+            <div class="card-media">
+                <img src="https://source.unsplash.com/600x400/?volunteer"
+                     alt="志愿者活动"
+                     class="card-image">
+                <div class="card-overlay"></div>
+            </div>
+            <div class="card-content">
+                <div class="card-meta">
+                    <span class="category">社会实践</span>
+                    <time class="date">3月15日 09:00</time>
+                </div>
+                <h3 class="card-title">志愿者公益活动</h3>
+                <p class="card-desc">用爱心温暖社区，积累志愿服务时长</p>
+                <div class="card-footer">
+                    <a href="/activity/1" class="btn-card">立即报名</a>
+                    <span class="participants">👥 已报名 128人</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 活动卡片2 -->
+        <div class="activity-card">
+            <div class="card-badge">热门</div>
+            <div class="card-media">
+                <img src="https://source.unsplash.com/600x400/?technology"
+                     alt="科技比赛"
+                     class="card-image">
+                <div class="card-overlay"></div>
+            </div>
+            <div class="card-content">
+                <div class="card-meta">
+                    <span class="category">学术竞赛</span>
+                    <time class="date">4月2日 14:00</time>
+                </div>
+                <h3 class="card-title">科技创新大赛</h3>
+                <p class="card-desc">展示科技创意，赢取万元奖金</p>
+                <div class="card-footer">
+                    <a href="/activity/2" class="btn-card">立即报名</a>
+                    <span class="participants">👥 已报名 86人</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 活动卡片3 -->
+        <div class="activity-card">
+            <div class="card-badge">热门</div>
+            <div class="card-media">
+                <img src="https://source.unsplash.com/600x400/?music"
+                     alt="歌手大赛"
+                     class="card-image">
+                <div class="card-overlay"></div>
+            </div>
+            <div class="card-content">
+                <div class="card-meta">
+                    <span class="category">文艺活动</span>
+                    <time class="date">3月20日 18:30</time>
+                </div>
+                <h3 class="card-title">校园歌手大赛</h3>
+                <p class="card-desc">寻找天籁之音，闪耀校园舞台</p>
+                <div class="card-footer">
+                    <a href="/activity/3" class="btn-card">立即报名</a>
+                    <span class="participants">👥 已报名 245人</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
