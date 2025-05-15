@@ -2,50 +2,73 @@
   <header class="header">
     <div class="container">
       <div class="logo">
-        <img :src="user.avatar" alt="User Avatar" />
-        <h1>XX大学校园活动</h1>
+        <h1>大学校园活动</h1>
       </div>
+
       <nav class="nav">
         <router-link to="/" class="active">首页</router-link>
         <router-link to="/activities">活动列表</router-link>
         <router-link to="/my-activities">我的活动</router-link>
         <router-link to="/about">关于我们</router-link>
       </nav>
+
       <div class="user-info">
-        <el-dropdown v-if="user">
-          <span class="el-dropdown-link">
-            <el-avatar :size="40" :src="user.avatar" />
-            {{ user.name }}
-          </span>
+        <el-dropdown v-if="userStore.user">
+<span class="el-dropdown-link">
+  <el-avatar
+      :size="40"
+      :src="userStore.user.avatar ||defaultAvatar"
+  />
+  {{ userStore.user.username || '未命名用户' }}
+</span>
+
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>个人中心</el-dropdown-item>
-              <el-dropdown-item>我的报名</el-dropdown-item>
+              <el-dropdown-item @click="$router.push('/profile')">个人中心</el-dropdown-item>
+<!--              <el-dropdown-item>我的报名</el-dropdown-item>-->
+              <el-dropdown-item @click="$router.push('/admin-apply')">成为管理员</el-dropdown-item>
               <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
+
         <div v-else>
-          <el-button type="primary" size="small" @click="showLoginDialog = true">登录</el-button>
-          <el-button size="small" @click="showRegisterDialog = true">注册</el-button>
+          <el-button type="primary" size="small" @click="router.push('/login')">登录</el-button>
+          <el-button size="small" @click="router.push('/register')">注册</el-button>
         </div>
       </div>
     </div>
   </header>
 </template>
 
-<script>
-export default {
-  name: 'Header',
-  props: {
-    user: Object
-  },
-  methods: {
-    logout() {
-      this.$emit('logout');
-    }
-  }
-};
+<script setup>
+import { ref } from 'vue'
+import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
+import { onMounted } from 'vue'
+import { watch } from 'vue'
+import defaultAvatar from '@/assets/images/avatar.png'//默认头像引入
+
+const userStore = useUserStore()
+const router = useRouter()
+
+onMounted(() => {
+  console.log('当前用户信息（延后打印）：', userStore.user)
+})
+
+watch(
+    () => userStore.user,
+    (newVal) => {
+      if (newVal) {
+        console.log('✅ 用户信息已加载:', newVal)
+      }
+    },
+    { immediate: true }
+)
+
+const logout = () => {
+  userStore.logout()
+}
 </script>
 
 <style scoped>
@@ -55,6 +78,7 @@ export default {
   position: sticky;
   top: 0;
   z-index: 1000;
+  font-size: xx-large;
 }
 
 .container {
@@ -81,8 +105,8 @@ export default {
 }
 
 .logo h1 {
-  font-size: 20px;
-  color: #409EFF;
+  font-size: 45px;
+  color: #9a1abd;
   margin: 0;
   white-space: nowrap;
 }

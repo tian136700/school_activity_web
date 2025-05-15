@@ -19,12 +19,16 @@ export default {
 
 <script setup>
 import { onMounted } from 'vue'
-
+import { useUserStore } from '@/stores/user'
+//获取用户信息，如果登录的话
+const userStore = useUserStore()
 onMounted(() => {
   const devtoolsBadge = document.getElementById('vue-devtools')
   if (devtoolsBadge) {
     devtoolsBadge.remove()
   }
+
+  userStore.initUser() // 🚨 非常关键，否则数据不会加载
 })
 </script>
 
