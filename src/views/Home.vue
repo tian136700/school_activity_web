@@ -327,4 +327,80 @@ export default {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }
+
+/* 平板（<=768px）适配 */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 20px;
+    padding-left: 8px;
+  }
+
+  .activity-card h3 {
+    font-size: 16px;
+  }
+
+  .activity-card p {
+    font-size: 13px;
+  }
+
+  .activity-card {
+    padding: 12px;
+  }
+
+  .announcement-date .day {
+    font-size: 20px;
+  }
+
+  .announcement-date .month {
+    font-size: 12px;
+  }
+
+  .announcement-content h3 {
+    font-size: 15px;
+  }
+
+  .announcement-content p {
+    font-size: 13px;
+  }
+
+  .el-button {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 0;
+  }
+}
+
+/* 手机小屏（<=480px）适配 */
+@media (max-width: 480px) {
+  .container {
+    padding: 15px 10px;
+  }
+
+  .activity-list {
+    grid-template-columns: 1fr; /* 单列布局 */
+  }
+
+  .announcement-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .announcement-date {
+    margin-bottom: 10px;
+  }
+
+  .announcement-content h3 {
+    font-size: 14px;
+  }
+
+  .announcement-content p {
+    font-size: 12px;
+  }
+
+  .activity-card img {
+    height: 140px;
+  }
+}
+
+
 </style>

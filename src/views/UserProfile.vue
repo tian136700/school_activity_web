@@ -4,7 +4,10 @@
       <h2 class="title">个人中心</h2>
 
       <el-form :model="form" ref="formRef" label-width="100px">
-        <el-form-item label="姓名">
+        <el-form-item>
+          <template #label>
+            <span class="required-star">*</span>姓名
+          </template>
           <el-input v-model="form.name" />
         </el-form-item>
 
@@ -12,44 +15,68 @@
           <el-input v-model="form.username" disabled />
         </el-form-item>
 
-        <el-form-item label="邮箱">
+        <el-form-item>
+          <template #label>
+            <span class="required-star">*</span>邮箱
+          </template>
           <el-input v-model="form.email" />
         </el-form-item>
 
-        <el-form-item label="手机号">
+        <el-form-item>
+          <template #label>
+            <span class="required-star">*</span>手机号
+          </template>
           <el-input v-model="form.phone" />
         </el-form-item>
 
-        <el-form-item label="性别">
+        <el-form-item>
+          <template #label>
+            <span class="required-star">*</span>性别
+          </template>
           <el-select v-model="form.gender" placeholder="请选择性别">
             <el-option label="男" value="male" />
             <el-option label="女" value="female" />
           </el-select>
         </el-form-item>
 
-        <el-form-item label="院系">
+        <el-form-item>
+          <template #label>
+            <span class="required-star">*</span>院系
+          </template>
           <el-select v-model="form.department_id" placeholder="请选择院系">
             <el-option v-for="dept in departments" :key="dept.id" :label="dept.name" :value="dept.id" />
           </el-select>
         </el-form-item>
 
-        <el-form-item label="专业">
+        <el-form-item>
+          <template #label>
+            <span class="required-star">*</span>专业
+          </template>
           <el-select v-model="form.major_id" :disabled="!majors.length" placeholder="请选择专业">
             <el-option v-for="major in majors" :key="major.id" :label="major.name" :value="major.id" />
           </el-select>
         </el-form-item>
 
-        <el-form-item label="班级">
+        <el-form-item>
+          <template #label>
+            <span class="required-star">*</span>班级
+          </template>
           <el-select v-model="form.class_id" :disabled="!classes.length" placeholder="请选择班级">
             <el-option v-for="cls in classes" :key="cls.id" :label="`${cls.class_number}班`" :value="cls.id" />
           </el-select>
         </el-form-item>
 
-        <el-form-item label="入学年份">
+        <el-form-item>
+          <template #label>
+            <span class="required-star">*</span>入学年份
+          </template>
           <el-input v-model="form.year" />
         </el-form-item>
 
-        <el-form-item label="学号">
+        <el-form-item>
+          <template #label>
+            <span class="required-star">*</span>学号
+          </template>
           <el-input v-model="form.student_id" />
         </el-form-item>
 
@@ -72,6 +99,8 @@
           </router-link>
         </el-form-item>
       </el-form>
+
+
     </el-card>
   </div>
 </template>
@@ -96,6 +125,10 @@ const majors = ref([])
 const classes = ref([])
 
 const token = localStorage.getItem('token')
+
+
+
+// 校验
 
 // 页面加载时
 onMounted(async () => {
@@ -228,6 +261,11 @@ const submit = async () => {
   min-height: 100vh;
 }
 
+.required-star {
+  color: red;
+  margin-right: 4px;
+}
+
 .profile-card {
   width: 600px;
   padding: 30px;
@@ -256,4 +294,49 @@ const submit = async () => {
   display: block;
   object-fit: cover;
 }
+
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 30px 12px;
+  }
+
+  .profile-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .el-form {
+    font-size: 14px;
+  }
+
+  .el-form-item {
+    flex-wrap: wrap;
+  }
+
+  .el-form-item .el-input,
+  .el-form-item .el-select {
+    width: 100%;
+  }
+
+  .avatar-uploader {
+    width: 80px;
+    height: 80px;
+  }
+
+  .avatar-uploader .avatar {
+    object-fit: cover;
+  }
+
+  .el-button {
+    font-size: 14px;
+  }
+}
+
 </style>

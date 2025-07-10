@@ -82,4 +82,39 @@ const logout = () => {
   justify-content: center;
   margin-top: 30px;
 }
+
+@media (max-width: 768px) {
+  .main.container {
+    width: 100%;
+    padding: 20px 12px;
+  }
+
+  .about-card {
+    padding: 24px;
+    border-radius: 8px;
+  }
+
+  .title {
+    font-size: 22px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .content p {
+    font-size: 15px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+
+  .button-group {
+    margin-top: 20px;
+  }
+
+  .button-group .el-button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
 </style>

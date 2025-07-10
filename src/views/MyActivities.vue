@@ -73,7 +73,7 @@ onMounted(async () => {
   }
 
   try {
-    const res = await request.get('/my-activities')
+    const res = await request.get('/activity-signups/my-activities')
     activities.value = res.data.data
   } catch (e) {
     console.error(e)

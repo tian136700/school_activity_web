@@ -168,4 +168,134 @@ const formatDate = (dateStr) => {
   text-align: center;
   margin-bottom: 20px;
 }
+@media (max-width: 768px) {
+  /* 页面整体布局 */
+  .application-page {
+    padding: 30px 12px;
+  }
+
+  .application-card {
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  /* 表单样式调整 */
+  .el-form {
+    font-size: 14px;
+  }
+
+  .el-form-item {
+    flex-wrap: wrap;
+  }
+
+  .el-form-item .el-input,
+  .el-form-item .el-select,
+  .el-form-item .el-textarea {
+    width: 100%;
+  }
+
+  .el-form-item .el-button {
+    margin-top: 10px;
+  }
+
+  /* 弹窗适配 */
+  .el-dialog {
+    width: 90% !important;
+    max-width: 400px;
+  }
+
+  .el-dialog__body {
+    font-size: 14px;
+    padding: 16px;
+    word-break: break-word;
+  }
+
+  .el-dialog__body p {
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .el-dialog__footer {
+    padding: 12px 16px;
+    text-align: center;
+  }
+
+  .el-dialog__footer .el-button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+@media (max-width: 768px) {
+  /* 页面整体布局 */
+  .application-page {
+    padding: 30px 12px;
+  }
+
+  .application-card {
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  /* 表单样式调整 */
+  .el-form {
+    font-size: 14px;
+  }
+
+  .el-form-item {
+    flex-wrap: wrap;
+  }
+
+  .el-form-item .el-input,
+  .el-form-item .el-select,
+  .el-form-item .el-textarea {
+    width: 100%;
+  }
+
+  .el-form-item .el-button {
+    margin-top: 10px;
+  }
+
+  /* 弹窗适配 */
+  .el-dialog {
+    width: 90% !important;
+    max-width: 400px;
+  }
+
+  .el-dialog__body {
+    font-size: 14px;
+    padding: 16px;
+    word-break: break-word;
+  }
+
+  .el-dialog__body p {
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .el-dialog__footer {
+    padding: 12px 16px;
+    text-align: center;
+  }
+
+  .el-dialog__footer .el-button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+
 </style>

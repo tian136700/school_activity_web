@@ -37,7 +37,7 @@
           <template v-else>
             <el-button
                 type="success"
-                :disabled="activity.status !== 1"
+                :disabled="activity.status !== 0"
                 @click="signUp"
             >
               立即报名
@@ -238,4 +238,53 @@ const hasSignedUp = ref(false)
   gap: 20px;
   margin-top: 40px;
 }
+@media (max-width: 768px) {
+  .main.container {
+    width: 100%;
+    padding: 20px 12px;
+  }
+
+  .detail-card {
+    padding: 24px;
+    border-radius: 10px;
+  }
+
+  .title {
+    font-size: 22px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .section p {
+    font-size: 15px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+    word-break: break-word;
+  }
+
+  .image-list {
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .activity-image {
+    width: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .button-group {
+    flex-direction: column; /* ✅ 按钮竖排 */
+    gap: 12px;
+    margin-top: 24px;
+    align-items: center;
+  }
+
+  .button-group .el-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
 </style>
